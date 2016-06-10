@@ -20,6 +20,3 @@ bool isValidSudoku(std::vector<std::vector<char>>& board) {
 	}
 	return true;
 }
-int main(){
-return 0;
-}
