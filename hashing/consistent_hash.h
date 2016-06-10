@@ -1,4 +1,3 @@
-
 #ifndef CONSISTENT_HASH
 #define CONSISTENT_HASH
 
