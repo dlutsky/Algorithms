@@ -1,5 +1,6 @@
 #include<cstddef>
 #include<string>
+#include<stdexcept>
 #include<iostream>
 
 class BasicCalculator{
@@ -54,7 +55,7 @@ private:
           break;
         case '-':
           if(state != 0){
-              return result;
+            return result;
           }
           i++;
           result -= calculate(s, i, 1);
@@ -69,6 +70,9 @@ private:
           break;
         case ')':
           i++;
+          return result;
+        default:
+          throw std::invalid_argument(std::string("Unknown variable ")+c);
           return result;
       }
     }
@@ -87,8 +91,15 @@ public:
 };
 
 int main(){
-  std::cout<<BasicCalculator::calculate("(23+56)*32+12/3")<<std::endl;
-  std::cout<<BasicCalculator::calculate("12+23-12+35*6/3")<<std::endl;
-  std::cout<<BasicCalculator::calculate("12.5+34.7+13/6")<<std::endl;
+  try{
+    std::cout<<BasicCalculator::calculate("(23+56)*32+12/3")<<std::endl;
+    std::cout<<BasicCalculator::calculate("12+23-12+35*6/3")<<std::endl;
+    std::cout<<BasicCalculator::calculate("12.5+34.7+13/6")<<std::endl;
+    std::cout<<BasicCalculator::calculate("12+abc*12+12")<<std::endl;
+    std::cout<<BasicCalculator::calculate("abc*12+12")<<std::endl;
+  }
+  catch(const std::invalid_argument& e){
+    std::cout<<e.what()<<std::endl;
+  }
   return 0;
 }
