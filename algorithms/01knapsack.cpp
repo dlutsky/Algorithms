@@ -11,4 +11,5 @@ int kanpsack(std::vector<int>& weights, std::vector<int>& values, int W){
 			dp[j] = MAX(dp[j], dp[j-weights[i]]+values[i]);
 		}
 	}
+	return dp[W];
 }
